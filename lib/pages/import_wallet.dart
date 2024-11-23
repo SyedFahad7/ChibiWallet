@@ -1,6 +1,7 @@
 import 'package:ChibiWallet/pages/wallet.dart';
 import 'package:ChibiWallet/providers/wallet_provider.dart';
 import 'package:flutter/material.dart';
+import '../constants/app_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ImportWallet extends StatefulWidget {
@@ -36,7 +37,10 @@ class _ImportWalletState extends State<ImportWallet> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Import from Seed'),
+        title: const Text(
+          'Import from Seed',
+          style: TextStyle(fontFamily: AppFonts.fontFamilyPlusJakartaSans),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +50,10 @@ class _ImportWalletState extends State<ImportWallet> {
           children: [
             const Text(
               'Please Enter your mnemonic phrase:',
-              style: TextStyle(fontSize: 18.0),
+              style: TextStyle(
+                fontSize: 18.0,
+                fontFamily: AppFonts.fontFamilyPlusJakartaSans,
+              ),
             ),
             const SizedBox(height: 24.0),
             TextField(
@@ -57,12 +64,19 @@ class _ImportWalletState extends State<ImportWallet> {
               },
               decoration: const InputDecoration(
                 labelText: 'Enter mnemonic phrase',
+                labelStyle: TextStyle(
+                  fontFamily: AppFonts.fontFamilyPlusJakartaSans,
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: verifyMnemonic,
-              child: const Text('Import'),
+              child: const Text(
+                'Import',
+                style:
+                    TextStyle(fontFamily: AppFonts.fontFamilyPlusJakartaSans),
+              ),
             ),
             const SizedBox(height: 24.0),
           ],

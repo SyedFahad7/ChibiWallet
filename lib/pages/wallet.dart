@@ -1,6 +1,7 @@
 import 'package:ChibiWallet/components/nft_balances.dart';
 import 'package:ChibiWallet/components/send_tokens.dart';
 import 'package:ChibiWallet/pages/create_or_import.dart';
+import 'package:ChibiWallet/pages/select_avatar_page.dart';
 import 'package:ChibiWallet/providers/wallet_provider.dart';
 import 'package:ChibiWallet/utils/get_balances.dart';
 import 'package:ChibiWallet/providers/theme_provider.dart';
@@ -23,12 +24,14 @@ class _WalletPageState extends State<WalletPage> {
   String walletAddress = '';
   String balance = '';
   String pvKey = '';
+  String? selectedAvatar;
   bool showWalletAddress = false;
 
   @override
   void initState() {
     super.initState();
     loadWalletData();
+    loadSelectedAvatar();
   }
 
   Future<void> loadWalletData() async {
@@ -60,7 +63,16 @@ class _WalletPageState extends State<WalletPage> {
     }
   }
 
-  void showWalletAddressDialog(BuildContext context) {
+  Future<void> loadSelectedAvatar() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedAvatar =
+          prefs.getString('selectedAvatar') ?? 'assets/images/dummy.png';
+    });
+  }
+
+  void showWalletAddressDialog(
+      BuildContext context, ThemeProvider themeProvider) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -76,14 +88,12 @@ class _WalletPageState extends State<WalletPage> {
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
-                  color: Provider.of<ThemeProvider>(context).isDarkMode
-                      ? Colors.white
-                      : Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black,
                   fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -97,9 +107,7 @@ class _WalletPageState extends State<WalletPage> {
                 walletAddress,
                 style: TextStyle(
                   fontSize: 14.0,
-                  color: Provider.of<ThemeProvider>(context).isDarkMode
-                      ? Colors.white
-                      : Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black,
                   fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                 ),
                 textAlign: TextAlign.center,
@@ -141,7 +149,7 @@ class _WalletPageState extends State<WalletPage> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60.0),
           child: Padding(
-            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+            padding: const EdgeInsets.only(top: 0.0, left: 16.0, right: 16.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30.0),
               child: AppBar(
@@ -152,12 +160,32 @@ class _WalletPageState extends State<WalletPage> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    GestureDetector(
+                      onTap: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SelectAvatarPage(),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            selectedAvatar = result;
+                          });
+                        }
+                      },
+                      child: CircleAvatar(
+                        radius: 23.0,
+                        backgroundImage: AssetImage(
+                            selectedAvatar ?? 'assets/images/dummy.png'),
+                      ),
+                    ),
                     const Spacer(),
                     const Center(
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 16.0),
+                        padding: EdgeInsets.only(bottom: 16.0, top: 16.0),
                         child: Text(
-                          'ChibiWallet',
+                          'Chibi Wallet',
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -169,7 +197,7 @@ class _WalletPageState extends State<WalletPage> {
                     ),
                     const Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
+                      padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
                       child: IconButton(
                         icon: Icon(themeProvider.isDarkMode
                             ? Icons.wb_sunny
@@ -272,7 +300,7 @@ class _WalletPageState extends State<WalletPage> {
                         const SizedBox(height: 16.0),
                         ElevatedButton.icon(
                           onPressed: () {
-                            showWalletAddressDialog(context);
+                            showWalletAddressDialog(context, themeProvider);
                           },
                           icon: Icon(
                             showWalletAddress
@@ -404,7 +432,7 @@ class _WalletPageState extends State<WalletPage> {
                         ],
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.4,
+                        height: MediaQuery.of(context).size.height * 0.2,
                         child: TabBarView(
                           children: [
                             // Assets Tab

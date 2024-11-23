@@ -2,6 +2,7 @@ import 'package:ChibiWallet/pages/wallet.dart';
 import 'package:ChibiWallet/providers/wallet_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../constants/app_fonts.dart';
 
 class VerifyMnemonicPage extends StatefulWidget {
   final String mnemonic;
@@ -26,7 +27,10 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Mnemonic Verified!'),
+            content: const Text(
+              'Mnemonic Verified!',
+              style: TextStyle(fontFamily: AppFonts.fontFamilyPlusJakartaSans),
+            ),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -38,7 +42,10 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Incorrect Mnemonic! Please try again.'),
+          content: const Text(
+            'Incorrect Mnemonic! Please try again.',
+            style: TextStyle(fontFamily: AppFonts.fontFamilyPlusJakartaSans),
+          ),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -60,7 +67,10 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verify Mnemonic and Create'),
+        title: const Text(
+          'Verify Mnemonic and Create',
+          style: TextStyle(fontFamily: AppFonts.fontFamilyPlusJakartaSans),
+        ),
         backgroundColor: Colors.blue.shade800,
       ),
       body: SafeArea(
@@ -83,6 +93,7 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue.shade800,
+                      fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -96,6 +107,9 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                     decoration: const InputDecoration(
                       labelText: 'Enter mnemonic phrase',
                       border: OutlineInputBorder(),
+                      labelStyle: TextStyle(
+                        fontFamily: AppFonts.fontFamilyPlusJakartaSans,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16.0),
@@ -108,6 +122,7 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                       textStyle: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
+                        fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                       ),
                       backgroundColor: Colors.blue.shade800,
                       foregroundColor: Colors.white,
@@ -127,6 +142,7 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                       textStyle: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
+                        fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                       ),
                       backgroundColor:
                           isVerified ? Colors.blue.shade800 : Colors.grey,
