@@ -1,4 +1,4 @@
-# ChibiWallet - A Flutter Crypto Wallet for Ethereum
+# <span style="color: #dd4f25;">ChibiWallet</span> - A Flutter Crypto Wallet for <span style="color: #3c0dfe;">Ethereum</span>
 
 **ChibiWallet** is a mobile app built with **Flutter** that enables users to send and receive Ethereum (ETH) and ERC-20 tokens. It allows users to manage their Ethereum-based assets securely and efficiently, providing an intuitive user experience for crypto transactions.
 
