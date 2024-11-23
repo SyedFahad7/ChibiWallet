@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../constants/app_fonts.dart';
+import 'package:ChibiWallet/providers/theme_provider.dart';
 
 class NFTListPage extends StatefulWidget {
   final String address;
@@ -64,14 +65,30 @@ class _NFTListPageState extends State<NFTListPage> {
   @override
   Widget build(BuildContext context) {
     return _nftList.isEmpty
-        ? const Center(
+        ? Center(
             child: Padding(
               padding: EdgeInsets.only(top: 16.0),
-              child: Text(
-                '😢 You have no NFTs yet',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: AppFonts.fontFamilyPlusJakartaSans),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: '😢 ',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'You have no NFTs yet',
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
+                        fontSize: 20,
+                        fontFamily: AppFonts.fontFamilyPlusJakartaSans,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )

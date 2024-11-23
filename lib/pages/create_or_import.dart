@@ -1,6 +1,7 @@
 import 'package:ChibiWallet/pages/generate_mnemonic_page.dart';
 import 'package:ChibiWallet/pages/import_wallet.dart';
 import 'package:flutter/material.dart';
+import '../constants/app_fonts.dart';
 
 class CreateOrImportPage extends StatelessWidget {
   const CreateOrImportPage({super.key});
@@ -25,11 +26,11 @@ class CreateOrImportPage extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               child: const Text(
-                'ChibiWallet',
+                'Chibi Wallet',
                 style: TextStyle(
                   fontSize: 32.0,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'PlusJakartaSans',
+                  fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                   color: Colors.white,
                 ),
               ),
@@ -44,8 +45,8 @@ class CreateOrImportPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40.0),
                   child: SizedBox(
-                    height: 150.0,
-                    width: 150.0,
+                    height: 120.0,
+                    width: 120.0,
                     child: Image.asset(
                       'assets/images/chibi.png',
                     ),
@@ -83,6 +84,7 @@ class CreateOrImportPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
+                    fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                   ),
                 ),
               ),
@@ -118,6 +120,7 @@ class CreateOrImportPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
+                    fontFamily: AppFonts.fontFamilyPlusJakartaSans,
                   ),
                 ),
               ),
